@@ -7,33 +7,29 @@
      private $host;
      private $name;
      private $pass;
-     //private $table;
      private $db;
-     //private $ut;
 
 
 
-     function __construct($host,$name,$pass,$db){
+     public function __construct($host,$name,$pass,$db){
      	$this->host=$host;
      	$this->name=$name;
      	$this->pass=$pass;
      	$this->db=$db;
-     	//$this->ut=$ut;
      	$this->connect();
 
      }
 
 
-     function connect(){
-      $link=mysql_connect($this->host,$this->name,$this->pass) or die ($this->error());
-      mysql_select_db($this->db,$link) or die("�޸����ݿ⣺".$this->table);
+     private function connect(){
+      $link=mysql_connect($this->host,$this->name,$this->pass) or die ("数据库连接错误");
+      mysql_select_db($this->db,$link) or die ("数据库选择错误");
       mysql_query("set character set 'utf8'");//读库 
       mysql_query("set names utf8");//写库
      }
 
-	function query($sql, $type = '') {
+	public function query($sql, $type = '') {
 		$query=mysql_query($sql);
-	    //if(!($query = mysql_query($sql))) $this->show('Say:', $sql);
 	    return $query;
 	}
 

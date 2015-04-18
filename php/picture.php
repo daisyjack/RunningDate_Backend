@@ -3,6 +3,7 @@ session_start();
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
+include("mysql.class.php");
 if(isset($_SESSION['id']))
 {
 	echo "已登录".$_SESSION['id'];
@@ -10,7 +11,11 @@ if(isset($_SESSION['id']))
 	{
 		if($_FILES['upfile']['error']==0)
 		{
-			move_uploaded_file($_FILES['upfile']['tmp_name'], 'd:/runningdate/'.$_SESSION['id'].'.jpg');
+			if(move_uploaded_file($_FILES['upfile']['tmp_name'], 'd:/runningdate/'.$_SESSION['id'].'.jpg'))
+			{
+				$mysql=new mysql("localhost","root", "", "runningdate");
+				$mysql->query("update user set picture='d:/runningdate/$_SESSION[id].jpg' where id='$_SESSION[id]'");
+			}
 			echo '上传成功';
 		}
 	}
