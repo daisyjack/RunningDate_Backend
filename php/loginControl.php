@@ -3,6 +3,11 @@ session_start();
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
+if($_GET['out'])
+{
+	session_destroy();
+	echo "<script>location.href='login.php';</script>";
+}else
 if(isset($_POST["submit"]) && $_POST["submit"] == "登陆")
 {
 	$user = $_POST["username"];
@@ -26,14 +31,15 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "登陆")
 		$num = mysql_num_rows($result);
 		if($num)
 		{
-			echo "<script>alert('登录成功！');history.go(-1);</script>";
-			//echo "{\'error\':0}";//登录成功
+			//echo "<script>alert('登录成功！');history.go(-1);</script>";
+			echo "{\'error\':0}";//登录成功
 			while($item=mysql_fetch_array($result))
 			{
 				$login[]=$item;
 			}
-			print_r($login);
+			//print_r($login);
 			$_SESSION[id]=$login[0][id];
+			echo "<script>location.href='local_home.php';</script>";
 		}
 		else
 		{
@@ -48,5 +54,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "登陆")
 		echo "<script>alert('提交未成功！'); history.go(-1);</script>";
 	}
 //删除
+
+
 
 ?>

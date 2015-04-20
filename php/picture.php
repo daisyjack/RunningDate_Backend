@@ -11,12 +11,13 @@ if(isset($_SESSION['id']))
 	{
 		if($_FILES['upfile']['error']==0)
 		{
-			if(move_uploaded_file($_FILES['upfile']['tmp_name'], 'd:/runningdate/'.$_SESSION['id'].'.jpg'))
+			if(move_uploaded_file($_FILES['upfile']['tmp_name'], '../../headpic/'.$_SESSION['id'].'.jpg'))
 			{
 				$mysql=new mysql("localhost","root", "", "runningdate");
-				$mysql->query("update user set picture='d:/runningdate/$_SESSION[id].jpg' where id='$_SESSION[id]'");
+				$mysql->query("update user set picture='/headpic/$_SESSION[id].jpg' where id='$_SESSION[id]'");
 			}
 			echo '上传成功';
+			echo "<script>location.href='local_home.php';</script>";
 		}
 	}
 }

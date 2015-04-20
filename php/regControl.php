@@ -43,9 +43,10 @@ if(isset($_POST["Submit"]) && $_POST["Submit"] == "register")
 				$res_insert = $mysql->query($sql_insert);
 				if($res_insert)
 					{
-						echo "<script>alert('注册成功！'); history.go(-1);</script>";
+						//echo "<script>alert('注册成功！'); history.go(-1);</script>";
 						//echo "{\"error\":0}";  //注册成功！ 
 						$_SESSION['id']=$uuid;
+						echo "<script>location.href='picture.php';</script>";
 					}
 				else
 					{
