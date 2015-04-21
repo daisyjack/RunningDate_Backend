@@ -25,7 +25,7 @@ if($result_m)
 	{
 	echo 匹配成功！;
 	$item=mysql_fetch_array($result_m);
-	print_r($item);
+	//print_r($item);
 	$name_m=$item[name];
 	$pic_m=$item[picture];
 	$time_m=$item[time];
@@ -47,6 +47,8 @@ style="width:300px;height:300px;"/>
 	<?php 
 
 }
+else
+	echo 暂时无匹配！;
 }
 	
 ?>
